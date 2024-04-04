@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "console-browserify": "^1.2.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
