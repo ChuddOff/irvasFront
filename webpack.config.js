@@ -4,6 +4,6 @@ module.exports = {
  entry: './js/main.js',
  output: {
     filename: 'start.js',
-    path: path.resolve(__dirname, './public'),
+    path: path.resolve(__dirname, './'),
  },
 };

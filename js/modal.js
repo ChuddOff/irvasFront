@@ -67,7 +67,7 @@ export const modals = () => {
             phone = document.querySelector(telsel).value;
         if (name && phone) {
             try {
-                const fet = await fetch('http://localhost:4000/api/zamer/go', {
+                const fet = await fetch('https://irvas-front.vercel.app/api/zamer/go', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
