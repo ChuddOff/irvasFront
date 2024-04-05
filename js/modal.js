@@ -73,10 +73,16 @@ export const modals = () => {
     async function createFet(event, namesel, telsel, noticesel) {
         event.preventDefault();
 
-        const name = document.querySelector(namesel).value,
-            phone = document.querySelector(telsel).value,
+        const name = document.querySelector(namesel),
+            phone = document.querySelector(telsel),
             notice = document.querySelector(noticesel);
-        if (name && phone) {
+
+        const litePhone = +phone.value.replace(/[\s+-]/g, '')
+        if (isNaN(litePhone)) {
+            notice.textContent = 'Введёт невалидный номер телефона!'
+            return
+        }
+        if (name.value && phone.value) {
             try {
                 const fet = await fetch('https://irvas-back-4g64.vercel.app/api/zamer/go', {
                     method: 'POST',
@@ -84,23 +90,24 @@ export const modals = () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name,
-                        phone
+                        name: name.value,
+                        tel: phone.value
                     })
                 })
                 if (fet.ok) {
-                    notice.insertAdjacentHTML('beforeend', '<p>Успешно! Ждите звонка.</p>')
                     console.log('Успех!');
+                    notice.textContent = 'Успешно! Ждите звонка.'
                 } else {
-                    // notice.insertAdjacentHTML('beforeend', '<p>Осечка! Попробуйте ещё раз.</p>')
-                    notice.innerHTML = '<p>Осечка! Попробуйте ещё раз.</p>'
-                    // console.log("Всё не занесено 321")
+                    notice.textContent = 'Осечка! Попробуйте ещё раз.'
+                    console.log("Всё не занесено 321")
                 }
             }
             catch (e) {
-                notice.insertAdjacentHTML('beforebegin', '<p>Осечка! Попробуйте ещё раз.</p>')
+                notice.textContent = 'Осечка! Попробуйте ещё раз.'
                 console.log('Ошибка при отправке данных', e);
             }
+            name.value = "";
+            phone.value = "";
         }
         }
 
@@ -135,4 +142,10 @@ export const modals = () => {
     document.querySelector('.popup_calc_end div div div form button').addEventListener('click', (event) => {
         createFet(event, '.popup_calc_end div div div form input[name="user_name"]', '.popup_calc_end div div div form input[name="user_phone"]', `main div div div form p`)
     })
+
+    // document.querySelectorAll('input[name="user_phone"]').forEach(el => {
+    //     el.addEventListener('input', (e) => {
+    //         const nomer = 
+    //     })
+    // })
 }
