@@ -5,7 +5,8 @@ export const modals = () => {
             headerbuttonmodel = document.querySelector(modal),
             headerbuttonexit = document.querySelector(close);
 
-        async function overCreate(event) {
+        
+        function overCreate(event) {
             createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`)
         }
         
@@ -14,9 +15,12 @@ export const modals = () => {
                 e.preventDefault();
             }
 
-            document.querySelector(`${modal} div div div form button`).addEventListener('click', (event) => {
-                overCreate(event);
-            })
+            const buttonSubmit = document.querySelector(`${modal} div div div form button`);
+            if (buttonSubmit) {
+                buttonSubmit.addEventListener('click', (event) => {
+                    overCreate(event);
+                })
+            }
                 
             document.body.style.overflow = 'hidden';
             headerbuttonmodel.style.display = "block";
@@ -29,9 +33,12 @@ export const modals = () => {
             document.body.style.overflow = '';
             headerbuttonmodel.style.display = "none";
 
-            document.querySelector(`${modal} div div div form button`).removeEventListener('click', (event) => {
-                overCreate(event);
-            })
+            const buttonSubmit = document.querySelector(`${modal} div div div form button`);
+            if (buttonSubmit) {
+                buttonSubmit.removeEventListener('click', (event) => {
+                    overCreate(event);
+                })
+            }
         })
         headerbuttonmodel.addEventListener('click', (e) => {
             e.preventDefault();
@@ -39,15 +46,18 @@ export const modals = () => {
                 document.body.style.overflow = '';
                 headerbuttonmodel.style.display = "none";
                 
-                document.querySelector(`${modal} div div div form button`).removeEventListener('click', (event) => {
-                    overCreate(event);
-                })
+                const buttonSubmit = document.querySelector(`${modal} div div div form button`);
+                if (buttonSubmit) {
+                    buttonSubmit.removeEventListener('click', (event) => {
+                        overCreate(event);
+                    })
+                }
             }
         })
     }
 
     function modalTime(modal, t) {
-        async function overCreate(event) {
+        function overCreate(event) {
             createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`)
         }
         const headerbuttonmodel = document.querySelector(modal);
@@ -97,9 +107,9 @@ export const modals = () => {
 
     const glaz = document.querySelector('.glazing .container').children
     for (let elNum=2; elNum < glaz.length; elNum++) {
-        buildModal(`${glaz[elNum].classList} div:nth-child(1) div.glazing_price button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
-        if (elNum != 5) {
-            buildModal(`${glaz[elNum].classList} div:nth-child(2) div.glazing_price button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
+        buildModal(`.${glaz[elNum].classList[0]} div:nth-child(1) > div.glazing_price > button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
+        if (elNum != 4) {
+            buildModal(`.${glaz[elNum].classList[0]} div:nth-child(2) div.glazing_price button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
         }
     }
 
