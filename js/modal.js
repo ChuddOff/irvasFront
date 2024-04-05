@@ -7,7 +7,7 @@ export const modals = () => {
 
         
         function overCreate(event) {
-            createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`)
+            createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`, `${modal} div div div form p`)
         }
         
         headerbutton.addEventListener('click', (e) => {
@@ -58,7 +58,7 @@ export const modals = () => {
 
     function modalTime(modal, t) {
         function overCreate(event) {
-            createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`)
+            createFet(event, `${modal} div div div form input[name="user_name"]`, `${modal} div div div form input[name="user_phone"]`, `${modal} div div div form p`)
         }
         const headerbuttonmodel = document.querySelector(modal);
         setTimeout(() => {
@@ -70,11 +70,12 @@ export const modals = () => {
         }, t)
     }
 
-    async function createFet(event, namesel, telsel) {
+    async function createFet(event, namesel, telsel, noticesel) {
         event.preventDefault();
 
         const name = document.querySelector(namesel).value,
-            phone = document.querySelector(telsel).value;
+            phone = document.querySelector(telsel).value,
+            notice = document.querySelector(noticesel);
         if (name && phone) {
             try {
                 const fet = await fetch('https://irvas-back-4g64.vercel.app/api/zamer/go', {
@@ -88,12 +89,16 @@ export const modals = () => {
                     })
                 })
                 if (fet.ok) {
+                    notice.insertAdjacentHTML('beforeend', '<p>Успешно! Ждите звонка.</p>')
                     console.log('Успех!');
                 } else {
-                    console.log("Всё не занесено 321")
+                    // notice.insertAdjacentHTML('beforeend', '<p>Осечка! Попробуйте ещё раз.</p>')
+                    notice.innerHTML = '<p>Осечка! Попробуйте ещё раз.</p>'
+                    // console.log("Всё не занесено 321")
                 }
             }
             catch (e) {
+                notice.insertAdjacentHTML('beforebegin', '<p>Осечка! Попробуйте ещё раз.</p>')
                 console.log('Ошибка при отправке данных', e);
             }
         }
@@ -114,20 +119,20 @@ export const modals = () => {
     }
 
     document.querySelector('main div div div form button').addEventListener('click', (event) => {
-        createFet(event, 'main div div div form input[name="user_name"]', 'main div div div form input[name="user_phone"]')
+        createFet(event, 'main div div div form input[name="user_name"]', 'main div div div form input[name="user_phone"]', `main div div div form p`)
     })
 
     for (let el of document.querySelector('.decoration_content .row').children) {
         document.querySelector(`.${el.classList} div form button`).addEventListener('click', (event) => {
-            createFet(event, `.${el.classList} div form input[name="user_name"]`, `.${el.classList} div form input[name="user_phone"]`)
+            createFet(event, `.${el.classList} div form input[name="user_name"]`, `.${el.classList} div form input[name="user_phone"]`, `main div div div form p`)
         })
     }
 
     document.querySelector('.sale div div div form button').addEventListener('click', (event) => {
-        createFet(event, '.sale div div div form input[name="user_name"]', '.sale div div div form input[name="user_phone"]')
+        createFet(event, '.sale div div div form input[name="user_name"]', '.sale div div div form input[name="user_phone"]', `main div div div form p`)
     })
 
     document.querySelector('.popup_calc_end div div div form button').addEventListener('click', (event) => {
-        createFet(event, '.popup_calc_end div div div form input[name="user_name"]', '.popup_calc_end div div div form input[name="user_phone"]')
+        createFet(event, '.popup_calc_end div div div form input[name="user_name"]', '.popup_calc_end div div div form input[name="user_phone"]', `main div div div form p`)
     })
 }
