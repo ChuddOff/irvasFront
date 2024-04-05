@@ -89,11 +89,19 @@ export const modals = () => {
         }
         }
 
-
+    
         
     buildModal('.header_btn_wrap', '.popup_engineer', '.popup_engineer .popup_close');
     buildModal('.contact_us_wrap .phone_link', '.popup', '.popup .popup_close');
     modalTime('.popup', 60000)
+
+    const glaz = document.querySelector('.glazing .container').children
+    for (let elNum=2; elNum < glaz.length; elNum++) {
+        buildModal(`${glaz[elNum].classList} div:nth-child(1) div.glazing_price button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
+        if (elNum != 5) {
+            buildModal(`${glaz[elNum].classList} div:nth-child(2) div.glazing_price button`, '.popup_calc', '.popup_calc div div button.popup_calc_close');
+        }
+    }
 
     document.querySelector('main div div div form button').addEventListener('click', (event) => {
         createFet(event, 'main div div div form input[name="user_name"]', 'main div div div form input[name="user_phone"]')
