@@ -37,7 +37,7 @@ export const modals = () => {
             if (buttonSubmit) {
                 buttonSubmit.removeEventListener('click', (event) => {
                     overCreate(event);
-                })
+                }) 
             }
         })
         headerbuttonmodel.addEventListener('click', (e) => {
