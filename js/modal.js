@@ -91,7 +91,7 @@ export const modals = () => {
                     },
                     body: JSON.stringify({
                         name: name.value,
-                        phone: phone.value
+                        phone: phone.value.replace(/\D/g, '')
                     })
                 })
                 if (fet.ok) {
