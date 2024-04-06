@@ -78,11 +78,11 @@ export const modals = () => {
             notice = document.querySelector(noticesel);
 
         const litePhone = +phone.value.replace(/[\s+-]/g, '')
-        if (isNaN(litePhone)) {
-            notice.textContent = 'Введёт невалидный номер телефона!'
-            return
-        }
-        if (name.value && phone.value) {
+        // if (isNaN(litePhone)) {
+        //     notice.textContent = 'Введёт невалидный номер телефона!'
+        //     return
+        // }
+        if (name.value && phone.value.length == 22) {
             try {
                 const fet = await fetch('https://irvas-back-4g64.vercel.app/api/zamer/go', {
                     method: 'POST',
@@ -143,9 +143,34 @@ export const modals = () => {
         createFet(event, '.popup_calc_end div div div form input[name="user_name"]', '.popup_calc_end div div div form input[name="user_phone"]', `main div div div form p`)
     })
 
-    // document.querySelectorAll('input[name="user_phone"]').forEach(el => {
-    //     el.addEventListener('input', (e) => {
-    //         const nomer = 
-    //     })
-    // })
+    document.querySelectorAll('input[name="user_phone"]').forEach(el => {
+        el.addEventListener('input', (e) => {
+            const cusor = e.target.selectionStart;
+
+            const x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            // e.target.value = x[2] ? '+'+x[1]+' ('+x[2]+') '+x[3]+' - '+x[4]+' - '+x[5] : '+'+x[1];
+            
+            if (x[4] && x[5].length!=0) {
+                e.target.value = '+'+x[1]+' ('+x[2]+') '+x[3]+' - '+x[4]+' - '+x[5]
+            }
+            else if (x[3] && x[4].length!=0) {
+                e.target.value = '+'+x[1]+' ('+x[2]+') '+x[3]+' - '+x[4]
+            }
+            else if (x[2] && x[3].length!=0) {
+                e.target.value = '+'+x[1]+' ('+x[2]+') '+x[3]
+            }
+            else if (x[1] && x[2].length!=0) {
+                e.target.value = '+'+x[1]+' ('+x[2]
+            } else {
+                e.target.value = '+'+x[1]
+            }
+
+            // e.target.setSelectionRange(cusor, cusor);
+        })
+        el.addEventListener('click', (e) => {
+            if (e.target.value == '') {
+                e.target.value = '+7'
+            }
+        })
+    })
 }
