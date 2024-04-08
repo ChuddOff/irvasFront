@@ -168,6 +168,7 @@ export const modals = () => {
             }
             name.value = "";
             phone.value = "";
+            localStorage.clear();
         }
         }
         
