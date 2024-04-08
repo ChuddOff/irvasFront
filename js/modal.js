@@ -139,7 +139,7 @@ export const modals = () => {
 
         if (name.value && phone.value.length == 22) {
             try {
-                const fet = await fetch('https://irvas-back-4g64.vercel.app/api/zamer/go', {
+                const fet = await fetch('https://irvas-back-4g64.vercel.app/api/zamer/goExtensive', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
