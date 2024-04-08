@@ -6,4 +6,5 @@ module.exports = {
     filename: 'start.js',
     path: path.resolve(__dirname, './'),
  },
+ mode: "development"
 };
