@@ -16,7 +16,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ \"./js/modal.js\");\n/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs */ \"./js/tabs.js\");\n\r\n\r\n\r\nwindow.addEventListener('DOMContentLoaded', () => {\r\n    (0,_modal__WEBPACK_IMPORTED_MODULE_0__.modals)();\r\n    (0,_tabs__WEBPACK_IMPORTED_MODULE_1__.tabs)();\r\n})\r\n\n\n//# sourceURL=webpack:///./js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal */ \"./js/modal.js\");\n/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tabs */ \"./js/tabs.js\");\n/* harmony import */ var _timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./timer */ \"./js/timer.js\");\n\r\n\r\n\r\n\r\nwindow.addEventListener('DOMContentLoaded', () => {\r\n    (0,_modal__WEBPACK_IMPORTED_MODULE_0__.modals)();\r\n    (0,_tabs__WEBPACK_IMPORTED_MODULE_1__.tabs)();\r\n    (0,_timer__WEBPACK_IMPORTED_MODULE_2__.timer)();\r\n})\r\n\n\n//# sourceURL=webpack:///./js/main.js?");
 
 /***/ }),
 
@@ -37,6 +37,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   tabs: () => (/* binding */ tabs)\n/* harmony export */ });\nconst tabs = () => {\r\n    function opencortab(tabsel, cortab, plus) {\r\n        const tabselector = document.querySelector(tabsel);\r\n        for(let el of tabselector.children) {\r\n            el.style.display = 'none';\r\n        }\r\n        if (plus) {\r\n            for (let i = 0; i < plus; i++) {\r\n                Array.from(tabselector.children)[i].style.display = 'block';\r\n            }\r\n        }\r\n        Array.from(tabselector.children)[cortab + plus].style.display = 'block';\r\n    }\r\n    function opentab(headers, tabs, plus = 0) {\r\n        const header = document.querySelectorAll(headers);\r\n        header.forEach(el => {\r\n            el.addEventListener('click', (e) => {\r\n                header.forEach(el2 => {\r\n                    el2.firstElementChild.classList.remove('after_click')\r\n                })\r\n                el.firstElementChild.classList.add('after_click')\r\n                opencortab(tabs, Array.from(header).indexOf(el), plus);\r\n            })\r\n        })\r\n\r\n    }\r\n    opentab('.decoration_item', '.decoration_content .row')\r\n    opentab('.glazing_block', '.glazing .container', 2)\r\n}\n\n//# sourceURL=webpack:///./js/tabs.js?");
+
+/***/ }),
+
+/***/ "./js/timer.js":
+/*!*********************!*\
+  !*** ./js/timer.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   timer: () => (/* binding */ timer)\n/* harmony export */ });\nconst timer = () => {\r\n    function timerActive(timeEnd, daysSel, hoursSel, minutesSel, secondsSel) {\r\n        const timeLast = timeEnd - new Date();\r\n        const days = Math.floor(timeLast / (1000 * 60 * 60 * 24)),\r\n            hours = Math.floor(timeLast % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)),\r\n            minutes = Math.floor(timeLast % (1000 * 60 * 60) / (1000 * 60 )),\r\n            seconds = Math.floor(timeLast % (1000 * 60) / 1000);\r\n\r\n        \r\n            document.querySelector(daysSel).innerHTML = (days).toString().padStart(2, \"0\");\r\n            document.querySelector(hoursSel).innerHTML = (hours).toString().padStart(2, \"0\");;\r\n            document.querySelector(minutesSel).innerHTML = (minutes).toString().padStart(2, \"0\");;\r\n            document.querySelector(secondsSel).innerHTML = (seconds).toString().padStart(2, \"0\");;\r\n\r\n        if (timeLast <= 0) {\r\n            clearInterval(interval);\r\n        }\r\n    }\r\n\r\n    const timeNow = new Date(2024, 6, 1, 0, 0, 0)\r\n    const interval = setInterval(() => timerActive(timeNow, '#days', '#hours', '#minutes', '#seconds'), 1)\r\n}\n\n//# sourceURL=webpack:///./js/timer.js?");
 
 /***/ })
 
