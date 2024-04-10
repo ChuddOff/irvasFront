@@ -24,7 +24,7 @@ export const modals = () => {
                 })
             }
                 
-            document.body.style.overflow = 'hidden';
+            // document.body.style.overflow = 'hidden';
             headerbuttonmodel.style.display = "block";
 
 
@@ -81,7 +81,7 @@ export const modals = () => {
         }
         const headerbuttonmodel = document.querySelector(modal);
         setTimeout(() => {
-            document.body.style.overflow = 'hidden';
+            // document.body.style.overflow = 'hidden';
             headerbuttonmodel.style.display = "block";
             document.querySelector(`${modal} div div div form button`).addEventListener('click', (event) => {
                 overCreate(event);
